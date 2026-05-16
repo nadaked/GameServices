@@ -165,3 +165,6 @@ public sealed class RewardButton : MonoBehaviour
 
 Created with Unity `6000.3.12f1`.
 
+## License
+
+This project is open source under the MIT License. See [LICENSE](LICENSE) for details.
