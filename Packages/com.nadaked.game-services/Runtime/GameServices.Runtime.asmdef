@@ -1,6 +1,6 @@
 ﻿{
     "name": "GameServices.Runtime",
-    "rootNamespace": "GameServices",
+    "rootNamespace": "GameServices.GameServices.Runtime",
     "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],

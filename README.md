@@ -94,34 +94,57 @@ Assets/
       Toolbar/
     Prefabs/
     Scenes/
-      GameServicesDemo.unity
     Scripts/
     Services/
       GameServicesProvider.asset
       GameServicesConfig.asset
       Factories/
 
-  GameServices/
+Packages/
+  com.nadaked.game-services/
     Runtime/
       Ads/
       Audio/
       Core/
       Save/
       SceneLoading/
-    Samples/
+    Samples~/
       Demo/
-        Scripts/
 ```
 
-`Assets/GameServices/Runtime` contains the reusable framework code. Keep this folder clean from project-specific assets.
+`Packages/com.nadaked.game-services/Runtime` contains the reusable framework code. Keep this folder clean from project-specific assets.
 
 `Assets/_Project` contains the current project's scenes, service configuration assets, audio clips, prefabs, and game scripts. When starting a new project from this repository, this is the main area to rename or customize.
 
 `Assets/_Project/Editor/Toolbar` contains project-level Unity Editor toolbar helpers for opening Project Settings and changing `Time.timeScale` from the main toolbar.
 
-`Assets/GameServices/Samples` contains sample-only scripts that demonstrate how to call the services.
+`Packages/com.nadaked.game-services/Samples~` contains package samples that can be imported through Unity Package Manager.
+
+When this repository is opened directly as a Unity project, `Assets/_Project` can be used as the local project layer. When the package is installed into another Unity project, use the package runtime and optionally import the demo sample from Package Manager.
+
+## Package Install
+
+Other Unity projects can install this package from Git:
+
+```text
+https://github.com/nadaked/GameServices.git?path=Packages/com.nadaked.game-services
+```
+
+For stable project usage, prefer version tags:
+
+```text
+https://github.com/nadaked/GameServices.git?path=Packages/com.nadaked.game-services#v0.1.0
+```
 
 ## Demo Setup
+
+If the package is installed through Unity Package Manager, import `Game Services Demo` from the package Samples panel. The imported sample includes its own demo scene, provider, config, and mock factory assets.
+
+For the base project setup, create a demo scene under:
+
+```text
+Assets/_Project/Scenes/GameServicesDemo.unity
+```
 
 Recommended scene hierarchy:
 

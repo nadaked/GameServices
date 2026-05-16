@@ -7,6 +7,12 @@
       "dependencies": {},
       "hash": "ee927cd3f735f5c5b08572b4df5ba2aab03bf5ce"
     },
+    "com.nadaked.game-services": {
+      "version": "file:com.nadaked.game-services",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
     "com.unity.ai.navigation": {
       "version": "2.0.11",
       "depth": 0,
