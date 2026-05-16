@@ -8,11 +8,13 @@ namespace GameServices.Runtime.Audio
     {
         private readonly bool _logCalls;
         private GameServiceStatus _status = GameServiceStatus.NotInitialized;
+        private float _masterVolume;
         private float _musicVolume;
         private float _sfxVolume;
 
-        public MockAudioService(float musicVolume, float sfxVolume, bool logCalls)
+        public MockAudioService(float masterVolume, float musicVolume, float sfxVolume, bool logCalls)
         {
+            _masterVolume = Mathf.Clamp01(masterVolume);
             _musicVolume = Mathf.Clamp01(musicVolume);
             _sfxVolume = Mathf.Clamp01(sfxVolume);
             _logCalls = logCalls;
@@ -21,6 +23,7 @@ namespace GameServices.Runtime.Audio
         public string ServiceId => "audio.mock";
         public GameServiceStatus Status => _status;
         public bool IsReady => _status == GameServiceStatus.Ready;
+        public float MasterVolume => _masterVolume;
         public float MusicVolume => _musicVolume;
         public float SfxVolume => _sfxVolume;
 
@@ -47,6 +50,12 @@ namespace GameServices.Runtime.Audio
         {
             Log($"Mock sfx played: {sfxId}");
             return Task.CompletedTask;
+        }
+
+        public void SetMasterVolume(float volume)
+        {
+            _masterVolume = Mathf.Clamp01(volume);
+            Log($"Mock master volume changed: {_masterVolume}");
         }
 
         public void SetMusicVolume(float volume)

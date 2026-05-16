@@ -8,6 +8,7 @@ namespace GameServices.Runtime.Audio
         public string ServiceId => "audio.null";
         public GameServiceStatus Status => GameServiceStatus.Disabled;
         public bool IsReady => true;
+        public float MasterVolume => 0f;
         public float MusicVolume => 0f;
         public float SfxVolume => 0f;
 
@@ -29,6 +30,10 @@ namespace GameServices.Runtime.Audio
         public Task PlaySfxAsync(string sfxId)
         {
             return Task.CompletedTask;
+        }
+
+        public void SetMasterVolume(float volume)
+        {
         }
 
         public void SetMusicVolume(float volume)

@@ -25,7 +25,10 @@ This project explores a cleaner pattern:
 - Audio
   - `IAudioService`
   - `MockAudioService`
+  - `UnityAudioService`
   - `NullAudioService`
+- Supports master, music, and SFX volume channels
+- Supports optional AudioMixerGroup routing for master, music, and SFX outputs
 - Scene Loading
   - `ISceneLoaderService`
   - `MockSceneLoaderService`
@@ -76,13 +79,44 @@ Plain C# registry that initializes services and resolves them by interface or se
 
 Base contract for all services.
 
-## Demo Setup
+## Project Structure
 
-The demo assets live under:
+This repository is structured so it can be used as a base Unity project:
 
 ```text
-Assets/GameServices/Samples/Demo
+Assets/
+  _Project/
+    Audio/
+      Music/
+      Sfx/
+    Prefabs/
+    Scenes/
+      GameServicesDemo.unity
+    Scripts/
+    Services/
+      GameServicesProvider.asset
+      GameServicesConfig.asset
+      Factories/
+
+  GameServices/
+    Runtime/
+      Ads/
+      Audio/
+      Core/
+      Save/
+      SceneLoading/
+    Samples/
+      Demo/
+        Scripts/
 ```
+
+`Assets/GameServices/Runtime` contains the reusable framework code. Keep this folder clean from project-specific assets.
+
+`Assets/_Project` contains the current project's scenes, service configuration assets, audio clips, prefabs, and game scripts. When starting a new project from this repository, this is the main area to rename or customize.
+
+`Assets/GameServices/Samples` contains sample-only scripts that demonstrate how to call the services.
+
+## Demo Setup
 
 Recommended scene hierarchy:
 
@@ -98,12 +132,12 @@ GameServicesDemo
 Create or assign these ScriptableObject assets:
 
 ```text
-GameServicesProvider.asset
-GameServicesConfig.asset
-MockAdsServiceFactory.asset
-MockAudioServiceFactory.asset
-MockSceneLoaderServiceFactory.asset
-PlayerPrefsSaveServiceFactory.asset
+Assets/_Project/Services/GameServicesProvider.asset
+Assets/_Project/Services/GameServicesConfig.asset
+Assets/_Project/Services/Factories/MockAdsServiceFactory.asset
+Assets/_Project/Services/Factories/MockAudioServiceFactory.asset
+Assets/_Project/Services/Factories/MockSceneLoaderServiceFactory.asset
+Assets/_Project/Services/Factories/PlayerPrefsSaveServiceFactory.asset
 ```
 
 Then add the factories to `GameServicesConfig`:
@@ -130,6 +164,14 @@ The demo controller exposes context menu actions:
 - Load Demo Position
 - Save Demo Json
 - Load Demo Json
+
+To use the real Unity audio adapter, create:
+
+```text
+Assets/Create/Game Services/Audio/Unity Audio
+```
+
+Then assign music and SFX clips with stable ids. Replace `MockAudioServiceFactory` with `UnityAudioServiceFactory` in `GameServicesConfig`.
 
 ## Example Usage
 
