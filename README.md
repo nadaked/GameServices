@@ -2,7 +2,7 @@
 
 GameServices is a Unity service architecture sample built around ScriptableObject factories, a ScriptableObject provider, and small typed service contracts.
 
-The goal is to keep game code away from concrete SDKs such as AdMob, Firebase, IAP, audio implementations, or scene loading details. Gameplay code asks for a capability like `IAdsService`, `IAudioService`, or `ISceneLoaderService`; the configured factories decide which runtime implementation is created.
+The goal is to keep game code away from concrete SDKs such as AdMob, Firebase, IAP, audio implementations, save backends, or scene loading details. Gameplay code asks for a capability like `IAdsService`, `IAudioService`, `ISaveService`, or `ISceneLoaderService`; the configured factories decide which runtime implementation is created.
 
 ## Why This Exists
 
@@ -30,6 +30,12 @@ This project explores a cleaner pattern:
   - `ISceneLoaderService`
   - `MockSceneLoaderService`
   - `NullSceneLoaderService`
+- Save
+  - `ISaveService`
+  - `MockSaveService`
+  - `PlayerPrefsSaveService`
+  - `NullSaveService`
+  - Supports primitive values, JSON data, and common Unity values such as `Vector2`, `Vector3`, `Quaternion`, and `Color`
 
 The same pattern can be extended for AdMob, Firebase, Unity IAP, analytics, remote config, save systems, localization, or any other game-level service.
 
@@ -97,6 +103,7 @@ GameServicesConfig.asset
 MockAdsServiceFactory.asset
 MockAudioServiceFactory.asset
 MockSceneLoaderServiceFactory.asset
+PlayerPrefsSaveServiceFactory.asset
 ```
 
 Then add the factories to `GameServicesConfig`:
@@ -105,6 +112,7 @@ Then add the factories to `GameServicesConfig`:
 MockAdsServiceFactory
 MockAudioServiceFactory
 MockSceneLoaderServiceFactory
+PlayerPrefsSaveServiceFactory
 ```
 
 Assign the same `GameServicesProvider` asset to both `GameServicesBootstrapper` and `GameServicesDemoController`.
@@ -116,6 +124,12 @@ The demo controller exposes context menu actions:
 - Play Music
 - Play Sfx
 - Load Scene
+- Save Demo Value
+- Load Demo Value
+- Save Demo Position
+- Load Demo Position
+- Save Demo Json
+- Load Demo Json
 
 ## Example Usage
 
@@ -142,6 +156,30 @@ public sealed class RewardButton : MonoBehaviour
 }
 ```
 
+Saving JSON data:
+
+```csharp
+[System.Serializable]
+public sealed class PlayerProgress
+{
+    public int level;
+    public int coins;
+    public string selectedTheme;
+}
+
+var save = provider.Get<ISaveService>();
+save.SetJson("player.progress", new PlayerProgress
+{
+    level = 12,
+    coins = 450,
+    selectedTheme = "forest"
+});
+
+await save.SaveAsync();
+
+var progress = save.GetJson("player.progress", new PlayerProgress());
+```
+
 ## Coding Style
 
 - Serialized private fields do not use an underscore prefix.
@@ -156,6 +194,7 @@ public sealed class RewardButton : MonoBehaviour
 - AdMob adapter service
 - Firebase adapter service
 - Unity IAP adapter service
+- JSON file save service
 - Parallel and ordered initialization modes
 - Service dependency declarations
 - Runtime status UI sample

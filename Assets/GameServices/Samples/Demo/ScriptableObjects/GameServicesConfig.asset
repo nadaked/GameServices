@@ -16,5 +16,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: bfe1fcf41311a04418e41bfbcaf2890a, type: 2}
   - {fileID: 11400000, guid: e6fcec0f0892f1e4ea1022f287563585, type: 2}
   - {fileID: 11400000, guid: a076ee0cf6b03684cac1a128264d79d1, type: 2}
+  - {fileID: 11400000, guid: 9d7087f2b9e34e64a92c7aa2db0f6b4d, type: 2}
   useMockServicesInEditor: 1
   verboseLogging: 1
