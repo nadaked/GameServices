@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using UnityEngine;
 
-namespace GameServices.Runtime.Core
+namespace GameServices.GameServices.Runtime.Core
 {
     [CreateAssetMenu(menuName = "Game Services/Provider", fileName = "GameServicesProvider")]
     public sealed class GameServicesProvider : ScriptableObject
@@ -50,3 +50,5 @@ namespace GameServices.Runtime.Core
         }
     }
 }
+
+

@@ -1,7 +1,7 @@
-using System;
+﻿using System;
 using UnityEngine;
 
-namespace GameServices.Runtime.Audio
+namespace GameServices.GameServices.Runtime.Audio
 {
     [Serializable]
     public sealed class AudioClipDefinition
@@ -13,3 +13,4 @@ namespace GameServices.Runtime.Audio
         public AudioClip Clip => clip;
     }
 }
+

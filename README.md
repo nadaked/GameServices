@@ -1,4 +1,4 @@
-# GameServices
+﻿# GameServices
 
 GameServices is a Unity service architecture sample built around ScriptableObject factories, a ScriptableObject provider, and small typed service contracts.
 
@@ -32,6 +32,7 @@ This project explores a cleaner pattern:
 - Scene Loading
   - `ISceneLoaderService`
   - `MockSceneLoaderService`
+  - `UnitySceneLoaderService`
   - `NullSceneLoaderService`
 - Save
   - `ISaveService`
@@ -89,6 +90,8 @@ Assets/
     Audio/
       Music/
       Sfx/
+    Editor/
+      Toolbar/
     Prefabs/
     Scenes/
       GameServicesDemo.unity
@@ -113,6 +116,8 @@ Assets/
 `Assets/GameServices/Runtime` contains the reusable framework code. Keep this folder clean from project-specific assets.
 
 `Assets/_Project` contains the current project's scenes, service configuration assets, audio clips, prefabs, and game scripts. When starting a new project from this repository, this is the main area to rename or customize.
+
+`Assets/_Project/Editor/Toolbar` contains project-level Unity Editor toolbar helpers for opening Project Settings and changing `Time.timeScale` from the main toolbar.
 
 `Assets/GameServices/Samples` contains sample-only scripts that demonstrate how to call the services.
 
@@ -173,11 +178,19 @@ Assets/Create/Game Services/Audio/Unity Audio
 
 Then assign music and SFX clips with stable ids. Replace `MockAudioServiceFactory` with `UnityAudioServiceFactory` in `GameServicesConfig`.
 
+To use the real Unity scene loader adapter, create:
+
+```text
+Assets/Create/Game Services/Scene Loading/Unity Scene Loader
+```
+
+Then replace `MockSceneLoaderServiceFactory` with `UnitySceneLoaderServiceFactory` in `GameServicesConfig`. Scenes loaded by name must be added to Unity Build Settings.
+
 ## Example Usage
 
 ```csharp
-using GameServices.Runtime.Ads;
-using GameServices.Runtime.Core;
+using GameServices.GameServices.Runtime.Ads;
+using GameServices.GameServices.Runtime.Core;
 using UnityEngine;
 
 public sealed class RewardButton : MonoBehaviour
@@ -242,6 +255,13 @@ var progress = save.GetJson("player.progress", new PlayerProgress());
 - Runtime status UI sample
 - Editor tooling for validating service configs
 
+## Third-Party Credits
+
+This project uses and references a few helpful community tools:
+
+- [adammyhre/Unity-Utils](https://github.com/adammyhre/Unity-Utils) by Adam Myhre, added through Unity Package Manager as `com.gitamend.unityutils`. The package is MIT licensed.
+- [Unity 6.3 Custom Main Toolbar gist](https://gist.github.com/NicolasChicunque/c2512380b1732d50e75fac4574a44b26) by Nicolas Chicunque, forked from Adam Myhre's toolbar gist. The scripts are placed under `Assets/_Project/Editor/Toolbar`.
+
 ## Unity Version
 
 Created with Unity `6000.3.12f1`.
@@ -249,3 +269,5 @@ Created with Unity `6000.3.12f1`.
 ## License
 
 This project is open source under the MIT License. See [LICENSE](LICENSE) for details.
+
+

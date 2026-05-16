@@ -1,7 +1,7 @@
-﻿using GameServices.Runtime.Core;
+﻿using GameServices.GameServices.Runtime.Core;
 using UnityEngine;
 
-namespace GameServices.Runtime.Ads
+namespace GameServices.GameServices.Runtime.Ads
 {
     [CreateAssetMenu(menuName = "Game Services/Ads/Mock Ads", fileName = "MockAdsServiceFactory")]
     public sealed class MockAdsServiceFactory : GameServiceFactory
@@ -23,3 +23,5 @@ namespace GameServices.Runtime.Ads
         }
     }
 }
+
+

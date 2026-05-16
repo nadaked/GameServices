@@ -1,7 +1,7 @@
-using System.Threading.Tasks;
-using GameServices.Runtime.Core;
+﻿using System.Threading.Tasks;
+using GameServices.GameServices.Runtime.Core;
 
-namespace GameServices.Runtime.SceneLoading
+namespace GameServices.GameServices.Runtime.SceneLoading
 {
     public sealed class NullSceneLoaderService : ISceneLoaderService
     {
@@ -26,3 +26,5 @@ namespace GameServices.Runtime.SceneLoading
         }
     }
 }
+
+

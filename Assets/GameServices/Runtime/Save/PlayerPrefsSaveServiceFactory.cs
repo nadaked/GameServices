@@ -1,7 +1,7 @@
-using GameServices.Runtime.Core;
+﻿using GameServices.GameServices.Runtime.Core;
 using UnityEngine;
 
-namespace GameServices.Runtime.Save
+namespace GameServices.GameServices.Runtime.Save
 {
     [CreateAssetMenu(menuName = "Game Services/Save/PlayerPrefs Save", fileName = "PlayerPrefsSaveServiceFactory")]
     public sealed class PlayerPrefsSaveServiceFactory : GameServiceFactory
@@ -16,3 +16,5 @@ namespace GameServices.Runtime.Save
         }
     }
 }
+
+

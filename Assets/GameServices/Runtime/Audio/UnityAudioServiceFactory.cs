@@ -1,8 +1,9 @@
-using GameServices.Runtime.Core;
+﻿using GameServices.GameServices.Runtime.Core;
+using GameServices.GameServices.Runtime.Audio;
 using UnityEngine;
 using UnityEngine.Audio;
 
-namespace GameServices.Runtime.Audio
+namespace GameServices.GameServices.Runtime.Audio
 {
     [CreateAssetMenu(menuName = "Game Services/Audio/Unity Audio", fileName = "UnityAudioServiceFactory")]
     public sealed class UnityAudioServiceFactory : GameServiceFactory
@@ -38,3 +39,5 @@ namespace GameServices.Runtime.Audio
         }
     }
 }
+
+

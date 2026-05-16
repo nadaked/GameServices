@@ -1,7 +1,7 @@
-using GameServices.Runtime.Core;
+﻿using GameServices.GameServices.Runtime.Core;
 using UnityEngine;
 
-namespace GameServices.Runtime.Audio
+namespace GameServices.GameServices.Runtime.Audio
 {
     [CreateAssetMenu(menuName = "Game Services/Audio/Mock Audio", fileName = "MockAudioServiceFactory")]
     public sealed class MockAudioServiceFactory : GameServiceFactory
@@ -19,3 +19,5 @@ namespace GameServices.Runtime.Audio
         }
     }
 }
+
+

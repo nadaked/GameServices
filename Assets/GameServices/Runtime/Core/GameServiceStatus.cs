@@ -1,4 +1,4 @@
-﻿namespace GameServices.Runtime.Core
+﻿namespace GameServices.GameServices.Runtime.Core
 {
     public enum GameServiceStatus
     {
@@ -9,3 +9,5 @@
         Disabled
     }
 }
+
+

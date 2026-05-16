@@ -1,8 +1,8 @@
-using System.Threading.Tasks;
-using GameServices.Runtime.Core;
+﻿using System.Threading.Tasks;
+using GameServices.GameServices.Runtime.Core;
 using UnityEngine;
 
-namespace GameServices.Runtime.Save
+namespace GameServices.GameServices.Runtime.Save
 {
     public interface ISaveService : IGameService
     {
@@ -31,3 +31,5 @@ namespace GameServices.Runtime.Save
         Task SaveAsync();
     }
 }
+
+

@@ -1,4 +1,4 @@
-﻿namespace GameServices.Runtime.Ads
+﻿namespace GameServices.GameServices.Runtime.Ads
 {
     public enum AdRewardResult
     {
@@ -8,3 +8,5 @@
         Failed
     }
 }
+
+

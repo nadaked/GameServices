@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace GameServices.Runtime.Core
+namespace GameServices.GameServices.Runtime.Core
 {
     public sealed class GameServiceContext
     {
@@ -18,3 +18,5 @@ namespace GameServices.Runtime.Core
         public RuntimePlatform Platform { get; }
     }
 }
+
+

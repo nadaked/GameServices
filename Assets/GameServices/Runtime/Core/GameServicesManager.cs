@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace GameServices.Runtime.Core
+namespace GameServices.GameServices.Runtime.Core
 {
     public sealed class GameServicesManager
     {
@@ -77,3 +77,5 @@ namespace GameServices.Runtime.Core
         }
     }
 }
+
+

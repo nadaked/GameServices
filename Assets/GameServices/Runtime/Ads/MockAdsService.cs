@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
-using GameServices.Runtime.Core;
+using GameServices.GameServices.Runtime.Core;
 using UnityEngine;
 
-namespace GameServices.Runtime.Ads
+namespace GameServices.GameServices.Runtime.Ads
 {
     public sealed class MockAdsService : IAdsService
     {
@@ -74,3 +74,5 @@ namespace GameServices.Runtime.Ads
         }
     }
 }
+
+

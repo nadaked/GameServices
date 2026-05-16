@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace GameServices.Runtime.Core
+namespace GameServices.GameServices.Runtime.Core
 {
     public abstract class GameServiceFactory : ScriptableObject
     {
@@ -12,3 +12,5 @@ namespace GameServices.Runtime.Core
         public abstract IGameService Create(GameServiceContext context);
     }
 }
+
+

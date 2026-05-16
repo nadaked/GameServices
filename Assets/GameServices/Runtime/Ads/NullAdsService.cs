@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
-using GameServices.Runtime.Core;
+using GameServices.GameServices.Runtime.Core;
 
-namespace GameServices.Runtime.Ads
+namespace GameServices.GameServices.Runtime.Ads
 {
     public sealed class NullAdsService : IAdsService
     {
@@ -27,3 +27,5 @@ namespace GameServices.Runtime.Ads
         }
     }
 }
+
+

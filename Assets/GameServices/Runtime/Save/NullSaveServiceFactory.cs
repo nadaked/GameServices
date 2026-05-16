@@ -1,7 +1,7 @@
-using GameServices.Runtime.Core;
+﻿using GameServices.GameServices.Runtime.Core;
 using UnityEngine;
 
-namespace GameServices.Runtime.Save
+namespace GameServices.GameServices.Runtime.Save
 {
     [CreateAssetMenu(menuName = "Game Services/Save/Null Save", fileName = "NullSaveServiceFactory")]
     public sealed class NullSaveServiceFactory : GameServiceFactory
@@ -14,3 +14,5 @@ namespace GameServices.Runtime.Save
         }
     }
 }
+
+

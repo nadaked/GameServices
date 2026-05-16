@@ -1,7 +1,7 @@
-﻿using GameServices.Runtime.Core;
+﻿using GameServices.GameServices.Runtime.Core;
 using UnityEngine;
 
-namespace GameServices.Runtime.Ads
+namespace GameServices.GameServices.Runtime.Ads
 {
     [CreateAssetMenu(menuName = "Game Services/Ads/Null Ads", fileName = "NullAdsServiceFactory")]
     public sealed class NullAdsServiceFactory : GameServiceFactory
@@ -14,3 +14,5 @@ namespace GameServices.Runtime.Ads
         }
     }
 }
+
+

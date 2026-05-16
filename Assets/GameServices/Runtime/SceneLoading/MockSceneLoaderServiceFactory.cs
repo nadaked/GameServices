@@ -1,7 +1,7 @@
-using GameServices.Runtime.Core;
+﻿using GameServices.GameServices.Runtime.Core;
 using UnityEngine;
 
-namespace GameServices.Runtime.SceneLoading
+namespace GameServices.GameServices.Runtime.SceneLoading
 {
     [CreateAssetMenu(menuName = "Game Services/Scene Loading/Mock Scene Loader", fileName = "MockSceneLoaderServiceFactory")]
     public sealed class MockSceneLoaderServiceFactory : GameServiceFactory
@@ -17,3 +17,5 @@ namespace GameServices.Runtime.SceneLoading
         }
     }
 }
+
+

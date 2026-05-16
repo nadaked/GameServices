@@ -1,7 +1,7 @@
-using System.Threading.Tasks;
-using GameServices.Runtime.Core;
+﻿using System.Threading.Tasks;
+using GameServices.GameServices.Runtime.Core;
 
-namespace GameServices.Runtime.Audio
+namespace GameServices.GameServices.Runtime.Audio
 {
     public interface IAudioService : IGameService
     {
@@ -17,3 +17,5 @@ namespace GameServices.Runtime.Audio
         void SetSfxVolume(float volume);
     }
 }
+
+

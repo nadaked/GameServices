@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace GameServices.Runtime.Core
+namespace GameServices.GameServices.Runtime.Core
 {
     [CreateAssetMenu(menuName = "Game Services/Config", fileName = "GameServicesConfig")]
     public sealed class GameServicesConfig : ScriptableObject
@@ -15,3 +15,5 @@ namespace GameServices.Runtime.Core
         public bool VerboseLogging => verboseLogging;
     }
 }
+
+

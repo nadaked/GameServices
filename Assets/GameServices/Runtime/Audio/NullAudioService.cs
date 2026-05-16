@@ -1,7 +1,7 @@
-using System.Threading.Tasks;
-using GameServices.Runtime.Core;
+﻿using System.Threading.Tasks;
+using GameServices.GameServices.Runtime.Core;
 
-namespace GameServices.Runtime.Audio
+namespace GameServices.GameServices.Runtime.Audio
 {
     public sealed class NullAudioService : IAudioService
     {
@@ -45,3 +45,5 @@ namespace GameServices.Runtime.Audio
         }
     }
 }
+
+

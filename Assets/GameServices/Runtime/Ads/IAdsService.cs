@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
-using GameServices.Runtime.Core;
+using GameServices.GameServices.Runtime.Core;
 
-namespace GameServices.Runtime.Ads
+namespace GameServices.GameServices.Runtime.Ads
 {
     public interface IAdsService : IGameService
     {
@@ -12,3 +12,5 @@ namespace GameServices.Runtime.Ads
         Task ShowInterstitialAsync(string placementId);
     }
 }
+
+

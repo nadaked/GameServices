@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace GameServices.Runtime.Core
+namespace GameServices.GameServices.Runtime.Core
 {
     public interface IGameService
     {
@@ -11,3 +11,5 @@ namespace GameServices.Runtime.Core
         Task InitializeAsync(GameServiceContext context);
     }
 }
+
+

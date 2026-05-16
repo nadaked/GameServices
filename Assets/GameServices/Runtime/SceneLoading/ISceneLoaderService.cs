@@ -1,7 +1,7 @@
-using System.Threading.Tasks;
-using GameServices.Runtime.Core;
+﻿using System.Threading.Tasks;
+using GameServices.GameServices.Runtime.Core;
 
-namespace GameServices.Runtime.SceneLoading
+namespace GameServices.GameServices.Runtime.SceneLoading
 {
     public interface ISceneLoaderService : IGameService
     {
@@ -11,3 +11,5 @@ namespace GameServices.Runtime.SceneLoading
         Task ReloadActiveSceneAsync();
     }
 }
+
+

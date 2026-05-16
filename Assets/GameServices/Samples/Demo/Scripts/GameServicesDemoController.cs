@@ -1,11 +1,11 @@
-using GameServices.Runtime.Ads;
-using GameServices.Runtime.Audio;
-using GameServices.Runtime.Core;
-using GameServices.Runtime.Save;
-using GameServices.Runtime.SceneLoading;
+﻿using GameServices.GameServices.Runtime.Ads;
+using GameServices.GameServices.Runtime.Audio;
+using GameServices.GameServices.Runtime.Core;
+using GameServices.GameServices.Runtime.Save;
+using GameServices.GameServices.Runtime.SceneLoading;
 using UnityEngine;
 
-namespace GameServices.Samples.Demo
+namespace GameServices.GameServices.Samples.Demo.Scripts
 {
     public sealed class GameServicesDemoController : MonoBehaviour
     {
@@ -258,3 +258,5 @@ namespace GameServices.Samples.Demo
         }
     }
 }
+
+

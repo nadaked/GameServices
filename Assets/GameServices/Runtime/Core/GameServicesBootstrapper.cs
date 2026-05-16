@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace GameServices.Runtime.Core
+namespace GameServices.GameServices.Runtime.Core
 {
     [DefaultExecutionOrder(-1000)]
     public sealed class GameServicesBootstrapper : MonoBehaviour
@@ -55,3 +55,5 @@ namespace GameServices.Runtime.Core
         }
     }
 }
+
+
