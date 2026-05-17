@@ -18,6 +18,9 @@ MonoBehaviour:
   masterVolume: 1
   musicVolume: 1
   sfxVolume: 1
+  sfxSourcePoolSize: 8
+  minSfxPitch: 0.5
+  maxSfxPitch: 2
   loopMusic: 1
   persistAcrossScenes: 1
   logWarnings: 1

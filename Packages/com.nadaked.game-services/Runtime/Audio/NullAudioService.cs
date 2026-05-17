@@ -32,6 +32,16 @@ namespace GameServices.GameServices.Runtime.Audio
             return Task.CompletedTask;
         }
 
+        public Task PlaySfxAsync(string sfxId, float pitch, float volumeScale = 1f)
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task PlaySfxAsync(string sfxId, SfxPlayOptions options)
+        {
+            return Task.CompletedTask;
+        }
+
         public void SetMasterVolume(float volume)
         {
         }

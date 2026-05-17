@@ -17,10 +17,15 @@ namespace GameServices.GameServices.Runtime.Audio
         private readonly AudioMixerGroup _masterOutput;
         private readonly AudioMixerGroup _musicOutput;
         private readonly AudioMixerGroup _sfxOutput;
+        private readonly int _sfxSourcePoolSize;
+        private readonly float _minSfxPitch;
+        private readonly float _maxSfxPitch;
 
         private GameObject _root;
         private AudioSource _musicSource;
-        private AudioSource _sfxSource;
+        private AudioSource[] _sfxSources;
+        private float[] _sfxSourceVolumeScales;
+        private int _nextSfxSourceIndex;
         private GameServiceStatus _status = GameServiceStatus.NotInitialized;
         private float _masterVolume;
         private float _musicVolume;
@@ -32,6 +37,9 @@ namespace GameServices.GameServices.Runtime.Audio
             float masterVolume,
             float musicVolume,
             float sfxVolume,
+            int sfxSourcePoolSize,
+            float minSfxPitch,
+            float maxSfxPitch,
             bool loopMusic,
             bool persistAcrossScenes,
             bool logWarnings,
@@ -44,6 +52,9 @@ namespace GameServices.GameServices.Runtime.Audio
             _masterVolume = Mathf.Clamp01(masterVolume);
             _musicVolume = Mathf.Clamp01(musicVolume);
             _sfxVolume = Mathf.Clamp01(sfxVolume);
+            _sfxSourcePoolSize = Mathf.Max(1, sfxSourcePoolSize);
+            _minSfxPitch = Mathf.Max(0.01f, Mathf.Min(minSfxPitch, maxSfxPitch));
+            _maxSfxPitch = Mathf.Max(_minSfxPitch, Mathf.Max(minSfxPitch, maxSfxPitch));
             _loopMusic = loopMusic;
             _persistAcrossScenes = persistAcrossScenes;
             _logWarnings = logWarnings;
@@ -68,10 +79,17 @@ namespace GameServices.GameServices.Runtime.Audio
 
             _root = new GameObject("GameServices Audio");
             _musicSource = _root.AddComponent<AudioSource>();
-            _sfxSource = _root.AddComponent<AudioSource>();
+            _sfxSources = new AudioSource[_sfxSourcePoolSize];
+            _sfxSourceVolumeScales = new float[_sfxSourcePoolSize];
 
             ConfigureAudioSource(_musicSource, GetEffectiveMusicVolume(), _loopMusic, _musicOutput ?? _masterOutput);
-            ConfigureAudioSource(_sfxSource, GetEffectiveSfxVolume(), false, _sfxOutput ?? _masterOutput);
+
+            for (var i = 0; i < _sfxSources.Length; i++)
+            {
+                _sfxSourceVolumeScales[i] = 1f;
+                _sfxSources[i] = _root.AddComponent<AudioSource>();
+                ConfigureAudioSource(_sfxSources[i], GetEffectiveSfxVolume(), false, _sfxOutput ?? _masterOutput);
+            }
 
             if (_persistAcrossScenes)
             {
@@ -115,13 +133,35 @@ namespace GameServices.GameServices.Runtime.Audio
 
         public Task PlaySfxAsync(string sfxId)
         {
+            return PlaySfxAsync(sfxId, SfxPlayOptions.Default);
+        }
+
+        public Task PlaySfxAsync(string sfxId, float pitch, float volumeScale = 1f)
+        {
+            return PlaySfxAsync(sfxId, new SfxPlayOptions(pitch, volumeScale));
+        }
+
+        public Task PlaySfxAsync(string sfxId, SfxPlayOptions options)
+        {
             if (!IsReady || !_sfxClips.TryGetValue(sfxId, out var clip))
             {
                 LogMissingClip("sfx", sfxId);
                 return Task.CompletedTask;
             }
 
-            _sfxSource.PlayOneShot(clip, GetEffectiveSfxVolume());
+            var sourceIndex = GetNextSfxSourceIndex();
+            var source = _sfxSources[sourceIndex];
+            var volumeScale = Mathf.Max(0f, options.VolumeScale);
+            var pitch = Mathf.Clamp(GetPlayablePitch(options.Pitch), _minSfxPitch, _maxSfxPitch);
+
+            _sfxSourceVolumeScales[sourceIndex] = volumeScale;
+            source.Stop();
+            source.clip = clip;
+            source.pitch = pitch;
+            source.volume = GetEffectiveSfxVolume() * volumeScale;
+            source.loop = false;
+            source.Play();
+
             return Task.CompletedTask;
         }
 
@@ -148,7 +188,11 @@ namespace GameServices.GameServices.Runtime.Audio
             if (IsReady)
             {
                 _musicSource.volume = GetEffectiveMusicVolume();
-                _sfxSource.volume = GetEffectiveSfxVolume();
+
+                for (var i = 0; i < _sfxSources.Length; i++)
+                {
+                    _sfxSources[i].volume = GetEffectiveSfxVolume() * _sfxSourceVolumeScales[i];
+                }
             }
         }
 
@@ -160,6 +204,28 @@ namespace GameServices.GameServices.Runtime.Audio
         private float GetEffectiveSfxVolume()
         {
             return _masterVolume * _sfxVolume;
+        }
+
+        private int GetNextSfxSourceIndex()
+        {
+            for (var i = 0; i < _sfxSources.Length; i++)
+            {
+                var index = (_nextSfxSourceIndex + i) % _sfxSources.Length;
+                if (!_sfxSources[index].isPlaying)
+                {
+                    _nextSfxSourceIndex = (index + 1) % _sfxSources.Length;
+                    return index;
+                }
+            }
+
+            var fallbackIndex = _nextSfxSourceIndex;
+            _nextSfxSourceIndex = (_nextSfxSourceIndex + 1) % _sfxSources.Length;
+            return fallbackIndex;
+        }
+
+        private static float GetPlayablePitch(float pitch)
+        {
+            return Mathf.Approximately(pitch, 0f) ? 1f : pitch;
         }
 
         private static Dictionary<string, AudioClip> BuildClipMap(IReadOnlyList<AudioClipDefinition> clips)

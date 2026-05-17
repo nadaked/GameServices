@@ -13,16 +13,25 @@ https://github.com/nadaked/GameServices.git?path=Packages/com.nadaked.game-servi
 For a tagged version:
 
 ```text
-https://github.com/nadaked/GameServices.git?path=Packages/com.nadaked.game-services#v0.1.0
+https://github.com/nadaked/GameServices.git?path=Packages/com.nadaked.game-services#v0.1.1
 ```
 
 ## Included Services
 
 - Ads contracts with mock/null implementations
-- Audio contracts with mock/null/Unity implementations
+- Audio contracts with mock/null/Unity implementations, including pitch-controlled pooled SFX playback
 - Save service with PlayerPrefs, JSON, Unity value types, mock, and null implementations
 - Scene loading service with mock/null/Unity implementations
 - ScriptableObject config, provider, factory, and bootstrapper core
+
+## Audio Example
+
+`UnityAudioServiceFactory` exposes `sfxSourcePoolSize`, `minSfxPitch`, and `maxSfxPitch` so overlapping SFX can play with independent pitch values.
+
+```csharp
+var audio = provider.Get<IAudioService>();
+await audio.PlaySfxAsync("combo_note", pitch: 1.122f, volumeScale: 0.9f);
+```
 
 ## Samples
 

@@ -48,7 +48,17 @@ namespace GameServices.GameServices.Runtime.Audio
 
         public Task PlaySfxAsync(string sfxId)
         {
-            Log($"Mock sfx played: {sfxId}");
+            return PlaySfxAsync(sfxId, SfxPlayOptions.Default);
+        }
+
+        public Task PlaySfxAsync(string sfxId, float pitch, float volumeScale = 1f)
+        {
+            return PlaySfxAsync(sfxId, new SfxPlayOptions(pitch, volumeScale));
+        }
+
+        public Task PlaySfxAsync(string sfxId, SfxPlayOptions options)
+        {
+            Log($"Mock sfx played: {sfxId}, pitch: {options.Pitch}, volume scale: {options.VolumeScale}");
             return Task.CompletedTask;
         }
 

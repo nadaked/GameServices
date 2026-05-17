@@ -13,6 +13,9 @@ namespace GameServices.GameServices.Runtime.Audio
         [SerializeField, Range(0f, 1f)] private float masterVolume = 1f;
         [SerializeField, Range(0f, 1f)] private float musicVolume = 1f;
         [SerializeField, Range(0f, 1f)] private float sfxVolume = 1f;
+        [SerializeField, Min(1)] private int sfxSourcePoolSize = 8;
+        [SerializeField, Min(0.01f)] private float minSfxPitch = 0.5f;
+        [SerializeField, Min(0.01f)] private float maxSfxPitch = 2f;
         [SerializeField] private bool loopMusic = true;
         [SerializeField] private bool persistAcrossScenes = true;
         [SerializeField] private bool logWarnings = true;
@@ -30,6 +33,9 @@ namespace GameServices.GameServices.Runtime.Audio
                 masterVolume,
                 musicVolume,
                 sfxVolume,
+                sfxSourcePoolSize,
+                minSfxPitch,
+                maxSfxPitch,
                 loopMusic,
                 persistAcrossScenes,
                 logWarnings && context.VerboseLogging,

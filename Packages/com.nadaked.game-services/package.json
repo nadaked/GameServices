@@ -1,6 +1,6 @@
 {
   "name": "com.nadaked.game-services",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "displayName": "Game Services",
   "description": "ScriptableObject factory based game service architecture for Unity projects.",
   "unity": "6000.3",

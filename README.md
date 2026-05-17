@@ -29,6 +29,7 @@ This project explores a cleaner pattern:
   - `NullAudioService`
 - Supports master, music, and SFX volume channels
 - Supports optional AudioMixerGroup routing for master, music, and SFX outputs
+- Supports pitch-controlled SFX playback with pooled AudioSources for combo notes and puzzle feedback
 - Scene Loading
   - `ISceneLoaderService`
   - `MockSceneLoaderService`
@@ -133,7 +134,7 @@ https://github.com/nadaked/GameServices.git?path=Packages/com.nadaked.game-servi
 For stable project usage, prefer version tags:
 
 ```text
-https://github.com/nadaked/GameServices.git?path=Packages/com.nadaked.game-services#v0.1.0
+https://github.com/nadaked/GameServices.git?path=Packages/com.nadaked.game-services#v0.1.1
 ```
 
 ## Demo Setup
@@ -201,6 +202,8 @@ Assets/Create/Game Services/Audio/Unity Audio
 
 Then assign music and SFX clips with stable ids. Replace `MockAudioServiceFactory` with `UnityAudioServiceFactory` in `GameServicesConfig`.
 
+`UnityAudioServiceFactory` also exposes `sfxSourcePoolSize`, `minSfxPitch`, and `maxSfxPitch` for pitch-aware SFX playback. This keeps overlapping SFX from changing each other's pitch.
+
 To use the real Unity scene loader adapter, create:
 
 ```text
@@ -256,6 +259,13 @@ save.SetJson("player.progress", new PlayerProgress
 await save.SaveAsync();
 
 var progress = save.GetJson("player.progress", new PlayerProgress());
+```
+
+Playing pitch-controlled SFX:
+
+```csharp
+var audio = provider.Get<IAudioService>();
+await audio.PlaySfxAsync("combo_note", pitch: 1.122f, volumeScale: 0.9f);
 ```
 
 ## Coding Style
